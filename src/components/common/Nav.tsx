@@ -10,7 +10,7 @@ const Nav = () => {
                     <nav className="flex justify-between bg-gray-200 text-blue-800 w-screen">
                         <div className="px-5 xl:px-12 py-6 flex w-full items-center">
                             <h1 className="text-3xl font-bold font-heading">
-                                Keycloak React AUTH.
+                                Fast Payment
                             </h1>
                             <ul className="flex space-x-6 mb-10 text-lg">
                                 <li>
@@ -39,7 +39,7 @@ const Nav = () => {
                                             className="text-blue-800"
                                             onClick={() => keycloak.logout()}
                                         >
-                                            Logout({keycloak.tokenParsed?.sub})
+                                            Logout
                                         </button>
                                     )}
                                 </div>
