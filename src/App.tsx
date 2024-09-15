@@ -11,12 +11,27 @@ import ProductList from "./components/products/ProductList.tsx";
 import MyOrders from "./components/orders/MyOrders.tsx";
 import Checkout from "./components/mycart/checkout/Checkout.tsx";
 import PaymentSuccessful from "./components/payment/PaymentSuccessful.tsx";
+import userStore from "./store/UserStore.ts";
 
 const App: React.FC = () => {
+    const onEvent = (event: string) => {
+        if (event === 'onAuthSuccess') {
+            const tokenParsed = keycloak.tokenParsed;
+            if (tokenParsed) {
+                userStore.setUser(
+                    tokenParsed.given_name,
+                    tokenParsed.family_name,
+                    tokenParsed.email,
+                    tokenParsed.preferred_username,
+                );
+            }
+        }
+    };
   return (
       <ReactKeycloakProvider
           authClient={keycloak}
           initOptions={{ onLoad: 'login-required' }}
+          onEvent={onEvent}
       >
           <Router>
               <Routes>

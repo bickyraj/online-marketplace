@@ -17,8 +17,11 @@ import CartDrawer from "./mycart/CartDrawer.tsx";
 import cartStore from "../store/CartStore.ts";
 import {observer} from "mobx-react-lite";
 import Notification from "./common/Notification.tsx";
+import userStore from "../store/UserStore.ts";
 const user = {
-    email: 'tom@example.com',
+    name: userStore.getFirstName(),
+    email: userStore.getEmail(),
+    username: userStore.getUserName(),
     imageUrl:
         'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
@@ -106,10 +109,11 @@ const MainLayout: React.FC = () => {
                                     <Menu as="div" className="relative ml-3">
                                         <div>
                                             <MenuButton
-                                                className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                                className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none">
                                                 <span className="absolute -inset-1.5"/>
                                                 <span className="sr-only">Open user menu</span>
                                                 <img alt="" src={user.imageUrl} className="h-8 w-8 rounded-full" />
+                                                <span className="ml-3 flex dark:text-blue-100 font-semibold capitalize">Hi! {user.name}</span>
                                             </MenuButton>
                                         </div>
                                         <MenuItems
@@ -128,7 +132,8 @@ const MainLayout: React.FC = () => {
                                             ))}
                                             <button className="flex hover:bg-gray-50 px-4 py-2 w-full text-sm text-gray-700 data-[focus]:bg-gray-100"
                                                 onClick={() => {
-                                                    cartStore.clearCart()
+                                                    cartStore.clearCart();
+                                                    userStore.clearUser();
                                                     keycloak.logout();
                                                 }}
                                             >Sign out</button>

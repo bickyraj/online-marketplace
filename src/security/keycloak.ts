@@ -5,4 +5,5 @@ const keycloak = new Keycloak({
     realm: 'fast-payment',
     clientId: 'fast-payment-client',
 })
+
 export default keycloak
