@@ -1,7 +1,66 @@
 import {observer} from "mobx-react-lite";
 import cartStore from "../../../store/CartStore.ts";
+import {useEffect, useState} from "react";
+import {useKeycloak} from "@react-keycloak/web";
+
+interface IPaymentMethod {
+    id: number;
+    cardDetail: IPaymentCard;
+
+}
+
+interface IPaymentCard {
+    cardNumber: number;
+    expiryYear: number;
+    expiryMonth: number;
+}
 
 const OrderPayment: React.FC = () => {
+    const {keycloak} = useKeycloak();
+    const [paymentMethods, setPaymentMethods] = useState<IPaymentMethod[]>([]);
+    const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<number>();
+    useEffect(() => {
+        fetchPaymentMethods();
+    }, []);
+
+    const handlePaymentMethodSelection = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSelectedPaymentMethod(parseInt(event.target.value)); // Update the state with the selected value
+    };
+
+    const placeOrder = async() => {
+        const url = "http://localhost:8080/api/orders/create";
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${keycloak.token}`,
+            },
+            body: JSON.stringify({
+                orderItems: cartStore.cartProducts.map((item) => {
+                    return {
+                        productId: item.id,
+                        quantity: 1
+                    }
+                }),
+                paymentMethodId: selectedPaymentMethod})
+        }).then(response => response.json());
+        console.log(response);
+        setPaymentMethods(response);
+    }
+
+
+    const fetchPaymentMethods = async () => {
+        const url = "http://localhost:8080/api/payment/payment-method";
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${keycloak.token}`,  // Bearer token
+            }
+        }).then(response => response.json());
+        setPaymentMethods(response);
+    }
+
     return (
         <div>
             <div className="px-4 sm:px-0 pt-10">
@@ -33,7 +92,7 @@ const OrderPayment: React.FC = () => {
                     <div className="flex items-center gap-x-3">
                         <input
                             id="push-everything"
-                            name="push-notifications"
+                            name="payment-type"
                             type="radio"
                             className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                         />
@@ -45,7 +104,7 @@ const OrderPayment: React.FC = () => {
                     <div className="flex items-center gap-x-2">
                         <input
                             id="push-email"
-                            name="push-notifications"
+                            name="payment-type"
                             type="radio"
                             className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                         />
@@ -56,12 +115,36 @@ const OrderPayment: React.FC = () => {
                     </div>
                 </div>
             </div>
+            <div className="border-t border-gray-100 pt-10 mt-6 mb-8 space-y-6">
+                {paymentMethods.length > 0 && (
+                    paymentMethods.map((paymentMethod: IPaymentMethod) => (
+                        <div key={paymentMethod.id} className="flex items-center gap-x-3">
+                            <input
+                                id=""
+                                value={paymentMethod.id}
+                                onChange={handlePaymentMethodSelection}
+                                name="payment-method"
+                                type="radio"
+                                className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                            />
+                            <label htmlFor="payment-method"
+                                   className="flex text-sm font-medium leading-6 text-gray-900">
+                                <div className="flex items-center mr-2">
+                                    **** **** **** {paymentMethod.cardDetail.cardNumber}
+                                </div>
+                                <span>{paymentMethod.cardDetail.expiryMonth}/{paymentMethod.cardDetail.expiryYear}</span>
+                            </label>
+                        </div>
+                    ))
+                )}
+            </div>
             <div className="grid container">
                 <button
+                    onClick={placeOrder}
                     type="submit"
                     className="rounded-md bg-gray-200 px-3 py-2 text-sm font-semibold text-gray-800 hover:text-white shadow-sm hover:bg-green-600 transition-colors ease-linear duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                    Confirm Payment
+                    Pay now
                 </button>
             </div>
         </div>
