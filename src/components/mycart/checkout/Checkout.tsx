@@ -17,10 +17,12 @@ import OrderPayment from "./OrderPayment.tsx";
 
 const Checkout: React.FC = () => {
     return (
-        <div className="grid grid-cols-2 gap-10">
-            <BillingDetail/>
-            <OrderPayment/>
-        </div>
+        <>
+            <div className="grid grid-cols-2 gap-10">
+                <BillingDetail/>
+                <OrderPayment/>
+            </div>
+        </>
     )
 }
 export default Checkout;
