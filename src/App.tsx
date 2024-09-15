@@ -8,8 +8,8 @@ import Dashboard from "./components/Dashboard.tsx";
 import ProtectedRoute from "./components/security/ProtectedRoute.tsx";
 import MainLayout from "./components/MainLayout.tsx";
 import ProductList from "./components/products/ProductList.tsx";
-import MyCart from "./components/mycart/MyCart.tsx";
 import MyOrders from "./components/orders/MyOrders.tsx";
+import Checkout from "./components/mycart/checkout/Checkout.tsx";
 
 const App: React.FC = () => {
   return (
@@ -23,9 +23,9 @@ const App: React.FC = () => {
                     <Route path="/admin" element={<MainLayout />}>
                           <Route path="/admin/dashboard" element={<Dashboard/>} />
                           <Route path="/admin/products" element={<ProductList/>} />
-                          <Route path="/admin/my-cart" element={<MyCart/>} />
                           <Route path="/admin/my-order-history" element={<MyOrders/>} />
                           <Route path="/admin/register" element={<RegistrationForm/>}/>
+                          <Route path="/admin/checkout" element={<Checkout/>}/>
                     </Route>
                   </Route>
               </Routes>

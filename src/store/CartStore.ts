@@ -16,6 +16,10 @@ class CartStore {
         return this.cartProducts.length;
     }
 
+    @computed get total() {
+        return this.cartProducts.reduce((sum, product) => sum + (product.price ?? 0), 0);
+    }
+
     @action // The @action decorator marks functions as actions that modify observable state
     addItem(item: ProductEntity) {
         this.cartProducts.push(item);

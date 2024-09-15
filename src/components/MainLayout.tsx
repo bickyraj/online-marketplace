@@ -23,9 +23,8 @@ const user = {
 }
 const navigation = [
     { name: 'Dashboard', href: '/admin/dashboard', current: true },
-    { name: 'My Products', href: '/admin/products', current: false },
+    { name: 'All Products', href: '/admin/products', current: false },
     { name: 'Registration', href: '/admin/register', current: false },
-    { name: 'My Cart', href: '/admin/my-cart', current: false },
     { name: 'My Order History', href: '/admin/my-order-history', current: false },
     { name: 'Reports', href: '#', current: false },
 ]
