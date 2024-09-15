@@ -53,7 +53,7 @@ const MainLayout: React.FC = () => {
       */}
             <Notification/>
             <div className="min-h-full">
-                <Disclosure as="nav" className="bg-gray-800">
+                <Disclosure as="nav" className="w-full bg-gray-800">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="flex h-16 items-center justify-between">
                             <div className="flex items-center">
@@ -89,7 +89,7 @@ const MainLayout: React.FC = () => {
                                             setOpenCart(!openCart);
                                         }}
                                         type="button"
-                                        className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                        className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white"
                                     >
                                         <span className="absolute -inset-1.5"/>
                                         <span className="sr-only">View notifications</span>
@@ -198,13 +198,13 @@ const MainLayout: React.FC = () => {
                             </div>
                         </div>
                     </DisclosurePanel>
+                    <header className="w-full bg-white shadow">
+                        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                            <h1 className="text-3xl font-bold tracking-tight text-gray-900">{PageUtil.pathToTitle(new URL(window.location.href))}</h1>
+                        </div>
+                    </header>
                 </Disclosure>
 
-                <header className="bg-white shadow">
-                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                        <h1 className="text-3xl font-bold tracking-tight text-gray-900">{PageUtil.pathToTitle(new URL(window.location.href))}</h1>
-                    </div>
-                </header>
                 <main>
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8"><Outlet /></div>
                 </main>

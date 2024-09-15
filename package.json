@@ -17,7 +17,6 @@
     "@stripe/stripe-js": "^4.4.0",
     "keycloak-js": "^25.0.5",
     "mobx": "^6.13.2",
-    "mobx-persist-store": "^1.1.5",
     "mobx-react-lite": "^4.0.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

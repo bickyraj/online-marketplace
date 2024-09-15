@@ -10,6 +10,12 @@ class NotificationStore {
 
     @action // The @action decorator marks functions as actions that modify observable state
     success(message: string) {
+        this.message = message;
+        this.updateNotification();
+    }
+
+    @action // The @action decorator marks functions as actions that modify observable state
+    error(message: string) {
         this.showNotification = true;
         this.message = message;
         setTimeout(() => {
@@ -21,6 +27,14 @@ class NotificationStore {
     @action
     close() {
         this.showNotification = false;
+    }
+
+    private updateNotification() {
+        this.showNotification = true;
+        setTimeout(() => {
+            this.message = "";
+            this.showNotification = false;
+        }, 3000)
     }
 }
 
