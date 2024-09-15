@@ -126,8 +126,11 @@ const MainLayout: React.FC = () => {
                                                     </a>
                                                 </MenuItem>
                                             ))}
-                                            <button className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100"
-                                                onClick={() => keycloak.logout()}
+                                            <button className="flex hover:bg-gray-50 px-4 py-2 w-full text-sm text-gray-700 data-[focus]:bg-gray-100"
+                                                onClick={() => {
+                                                    cartStore.clearCart()
+                                                    keycloak.logout();
+                                                }}
                                             >Sign out</button>
                                         </MenuItems>
                                     </Menu>
