@@ -51,7 +51,7 @@ const OrderPayment: React.FC = () => {
             notificationStore.success("payment successful");
             cartStore.clearCart();
             setTimeout(() => {
-                navigate("/admin/dashboard");
+                navigate("/admin/payment-successful");
             }, 1000)
         }
     }

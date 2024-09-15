@@ -10,6 +10,7 @@ import MainLayout from "./components/MainLayout.tsx";
 import ProductList from "./components/products/ProductList.tsx";
 import MyOrders from "./components/orders/MyOrders.tsx";
 import Checkout from "./components/mycart/checkout/Checkout.tsx";
+import PaymentSuccessful from "./components/payment/PaymentSuccessful.tsx";
 
 const App: React.FC = () => {
   return (
@@ -26,6 +27,7 @@ const App: React.FC = () => {
                           <Route path="/admin/my-order-history" element={<MyOrders/>} />
                           <Route path="/admin/register" element={<RegistrationForm/>}/>
                           <Route path="/admin/checkout" element={<Checkout/>}/>
+                          <Route path="/admin/payment-successful" element={<PaymentSuccessful/>}/>
                     </Route>
                   </Route>
               </Routes>
