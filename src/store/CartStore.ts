@@ -41,6 +41,11 @@ class CartStore {
         return this.cartProducts.findIndex(item => item.id == product.id) !== -1;
     }
 
+    clearCart(): void {
+        this.cartProducts = [];
+        this.save();
+    }
+
     private save() {
         StorageUtil.save(CartStore.STORAGE_KEY, this.cartProducts);
     }

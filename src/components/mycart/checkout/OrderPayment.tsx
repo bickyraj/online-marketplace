@@ -2,6 +2,8 @@ import {observer} from "mobx-react-lite";
 import cartStore from "../../../store/CartStore.ts";
 import {useEffect, useState} from "react";
 import {useKeycloak} from "@react-keycloak/web";
+import notificationStore from "../../../store/NotificationStore.ts";
+import {useNavigate} from "react-router-dom";
 
 interface IPaymentMethod {
     id: number;
@@ -17,6 +19,7 @@ interface IPaymentCard {
 
 const OrderPayment: React.FC = () => {
     const {keycloak} = useKeycloak();
+    const navigate = useNavigate();
     const [paymentMethods, setPaymentMethods] = useState<IPaymentMethod[]>([]);
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<number>();
     useEffect(() => {
@@ -44,8 +47,13 @@ const OrderPayment: React.FC = () => {
                 }),
                 paymentMethodId: selectedPaymentMethod})
         }).then(response => response.json());
-        console.log(response);
-        setPaymentMethods(response);
+        if (response) {
+            notificationStore.success("payment successful");
+            cartStore.clearCart();
+            setTimeout(() => {
+                navigate("/admin/dashboard");
+            }, 1000)
+        }
     }
 
 
@@ -120,7 +128,7 @@ const OrderPayment: React.FC = () => {
                     paymentMethods.map((paymentMethod: IPaymentMethod) => (
                         <div key={paymentMethod.id} className="flex items-center gap-x-3">
                             <input
-                                id=""
+                                id="test"
                                 value={paymentMethod.id}
                                 onChange={handlePaymentMethodSelection}
                                 name="payment-method"

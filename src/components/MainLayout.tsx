@@ -16,6 +16,7 @@ import {ShoppingCartIcon} from "@heroicons/react/16/solid";
 import CartDrawer from "./mycart/CartDrawer.tsx";
 import cartStore from "../store/CartStore.ts";
 import {observer} from "mobx-react-lite";
+import Notification from "./common/Notification.tsx";
 const user = {
     email: 'tom@example.com',
     imageUrl:
@@ -50,6 +51,7 @@ const MainLayout: React.FC = () => {
         <body class="h-full">
         ```
       */}
+            <Notification/>
             <div className="min-h-full">
                 <Disclosure as="nav" className="bg-gray-800">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
