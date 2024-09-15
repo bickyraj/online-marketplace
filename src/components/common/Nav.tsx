@@ -17,13 +17,20 @@ const Nav = () => {
                                     <Link to="/register" className="text-blue-500 hover:underline">Register</Link>
                                 </li>
                                 {keycloak.authenticated && (
-                                    <li>
-                                        <Link to="/admin/dashboard" className="text-blue-500 hover:underline">Dashboard</Link>
-                                    </li>
+                                    <>
+                                        <li>
+                                            <Link to="/admin/dashboard"
+                                                  className="text-blue-500 hover:underline">Dashboard</Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/admin/products"
+                                                  className="text-blue-500 hover:underline">Products</Link>
+                                        </li>
+                                    </>
                                 )}
                             </ul>
                             <div className="hidden xl:flex items-center space-x-5">
-                                <div className="hover:text-gray-200">
+                            <div className="hover:text-gray-200">
                                     {!keycloak.authenticated && (
                                         <button
                                             type="button"

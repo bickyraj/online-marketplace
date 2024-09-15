@@ -1,13 +1,15 @@
-import './index.css';
+import './App.css';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import React from "react";
 import {ReactKeycloakProvider} from "@react-keycloak/web";
 import keycloak from "./security/keycloak.ts";
-import Nav from "./components/common/Nav.tsx";
 import RegistrationForm from "./components/RegistrationForm.tsx";
-import Dashboard from "./components/admin/Dashboard.tsx";
-import Home from "./components/Home.tsx";
+import Dashboard from "./components/Dashboard.tsx";
 import ProtectedRoute from "./components/security/ProtectedRoute.tsx";
+import MainLayout from "./components/MainLayout.tsx";
+import ProductList from "./components/products/ProductList.tsx";
+import MyCart from "./components/mycart/MyCart.tsx";
+import MyOrders from "./components/orders/MyOrders.tsx";
 
 const App: React.FC = () => {
   return (
@@ -16,17 +18,17 @@ const App: React.FC = () => {
           initOptions={{ onLoad: 'login-required' }}
       >
           <Router>
-              <Nav />
-              <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-start pt-10">
-                  {/* Routes for the different components */}
-                  <Routes>
-                      <Route path="/admin" element={<ProtectedRoute />}>
+              <Routes>
+                  <Route path="/admin" element={<ProtectedRoute />}>
+                    <Route path="/admin" element={<MainLayout />}>
                           <Route path="/admin/dashboard" element={<Dashboard/>} />
-                      </Route>
-                      <Route path="/register" element={<RegistrationForm/>}/>
-                      <Route path="/" element={<Home/>} />
-                  </Routes>
-              </div>
+                          <Route path="/admin/products" element={<ProductList/>} />
+                          <Route path="/admin/my-cart" element={<MyCart/>} />
+                          <Route path="/admin/my-order-history" element={<MyOrders/>} />
+                          <Route path="/admin/register" element={<RegistrationForm/>}/>
+                    </Route>
+                  </Route>
+              </Routes>
           </Router>
       </ReactKeycloakProvider>
   )
