@@ -3,6 +3,7 @@ import {useKeycloak} from "@react-keycloak/web";
 import ProductEntity from "../entity/ProductEntity.tsx";
 import {ShoppingCartIcon} from "@heroicons/react/16/solid";
 import CartStore from "../../store/CartStore.ts";
+import {observer} from "mobx-react-lite";
 
 const ProductList:React.FC = () => {
     const { keycloak } = useKeycloak();
@@ -49,17 +50,25 @@ const ProductList:React.FC = () => {
                                     </div>
                                     <p className="text-sm font-medium text-gray-900">{product.price}</p>
                                 </div>
-                                <button
-                                    onClick={(): void => {
-                                        cartStore.addItem(product);
-                                    }}
-                                    className="flex items-center justify-around rounded-md bg-indigo-700 mt-1 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                                >
-                                    <div>
-                                        Add to
-                                    </div>
-                                    <ShoppingCartIcon className="h-4 w-4"/>
-                                </button>
+                                <div className="flex flex-row items-center justify-between">
+                                    <button
+                                        onClick={(): void => {
+                                            cartStore.addItem(product);
+                                        }}
+                                        className="flex items-center justify-around rounded-md bg-indigo-700 mt-1 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                                    >
+                                        <div>
+                                            Add to
+                                        </div>
+                                        <ShoppingCartIcon className="h-4 w-4"/>
+                                    </button>
+                                    {cartStore.productIsInCart(product) && (
+                                        <span
+                                            className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/10">
+                                            In cart
+                                        </span>
+                                    )}
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -69,4 +78,4 @@ const ProductList:React.FC = () => {
     );
 }
 
-export default ProductList;
+export default observer(ProductList);

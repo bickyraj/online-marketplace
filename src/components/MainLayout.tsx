@@ -14,6 +14,8 @@ import {Outlet} from "react-router-dom";
 import PageUtil from "../utils/PageUtil.ts";
 import {ShoppingCartIcon} from "@heroicons/react/16/solid";
 import CartDrawer from "./mycart/CartDrawer.tsx";
+import cartStore from "../store/CartStore.ts";
+import {observer} from "mobx-react-lite";
 const user = {
     email: 'tom@example.com',
     imageUrl:
@@ -88,17 +90,23 @@ const MainLayout: React.FC = () => {
                                         type="button"
                                         className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                                     >
-                                        <span className="absolute -inset-1.5" />
+                                        <span className="absolute -inset-1.5"/>
                                         <span className="sr-only">View notifications</span>
-                                        <ShoppingCartIcon aria-hidden="true" className="h-6 w-6" />
+                                        <div className="relative py-2">
+                                            <div className="-top-1 absolute left-3">
+                                                <p className="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-2.5 text-xs text-white">{cartStore.itemCount}</p>
+                                            </div>
+                                            <ShoppingCartIcon aria-hidden="true" className="h-6 w-6"/>
+                                        </div>
                                     </button>
-                                    <CartDrawer open={openCart} onClose={() => setOpenCart(false)} />
+                                    <CartDrawer open={openCart} onClose={() => setOpenCart(false)}/>
 
                                     {/* Profile dropdown */}
                                     <Menu as="div" className="relative ml-3">
                                         <div>
-                                            <MenuButton className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                                                <span className="absolute -inset-1.5" />
+                                            <MenuButton
+                                                className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                                <span className="absolute -inset-1.5"/>
                                                 <span className="sr-only">Open user menu</span>
                                                 <img alt="" src={user.imageUrl} className="h-8 w-8 rounded-full" />
                                             </MenuButton>
@@ -201,4 +209,4 @@ const MainLayout: React.FC = () => {
     )
 }
 
-export default MainLayout;
+export default observer(MainLayout);
