@@ -4,6 +4,7 @@ import UserOrder from "./UserOrder.ts";
 import {
     CurrencyDollarIcon,
 } from '@heroicons/react/20/solid'
+import {formattedPrice} from "../../utils/PriceUtil.ts";
 
 const ProductList:React.FC = () => {
     const { keycloak } = useKeycloak();
@@ -50,7 +51,7 @@ const ProductList:React.FC = () => {
                     {/*</div>*/}
                     <div className="mt-2 flex items-center text-sm text-gray-500">
                         <CurrencyDollarIcon aria-hidden="true" className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"/>
-                        Total: ${getTotalAmountOfAllOrders()}
+                        Total: ${formattedPrice(getTotalAmountOfAllOrders())}
                     </div>
                     {/*<div className="mt-2 flex items-center text-sm text-gray-500">*/}
                     {/*    <CalendarIcon aria-hidden="true" className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"/>*/}
@@ -82,7 +83,7 @@ const ProductList:React.FC = () => {
                                             </h3>
                                             {/*<p className="mt-1 text-sm text-gray-500">{product.color}</p>*/}
                                         </div>
-                                        <p className="text-sm font-medium text-gray-900">{orderItem.product.price}</p>
+                                        <p className="text-sm font-medium text-gray-900">${formattedPrice(orderItem.product.price)}</p>
                                     </div>
                                 </div>
                             ))

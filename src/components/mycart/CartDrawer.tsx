@@ -3,6 +3,7 @@ import {XMarkIcon} from "@heroicons/react/24/outline";
 import React from "react";
 import CartStore from "../../store/CartStore.ts";
 import {observer} from "mobx-react-lite";
+import {formattedPrice} from "../../utils/PriceUtil.ts";
 
 interface IProps {
     open: boolean;
@@ -83,7 +84,7 @@ const CartDrawer: React.FC<IProps> = (props) =>  {
                                                                     <h3>
                                                                         <a href={product.name}>{product.name}</a>
                                                                     </h3>
-                                                                    <p className="ml-4">{product.price}</p>
+                                                                    <p className="ml-4">${formattedPrice(product.price ?? 0)}</p>
                                                                 </div>
                                                                 {/*<p className="mt-1 text-sm text-gray-500">{product.color}</p>*/}
                                                             </div>
@@ -111,7 +112,7 @@ const CartDrawer: React.FC<IProps> = (props) =>  {
                                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                                         <div className="flex justify-between text-base font-medium text-gray-900">
                                             <p>Subtotal</p>
-                                            <p>${cartStore.total}</p>
+                                            <p>${formattedPrice(cartStore.total)}</p>
                                         </div>
                                         <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at
                                             checkout.</p>

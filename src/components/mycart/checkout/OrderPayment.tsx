@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {useKeycloak} from "@react-keycloak/web";
 import notificationStore from "../../../store/NotificationStore.ts";
 import {useNavigate} from "react-router-dom";
+import {formattedPrice} from "../../../utils/PriceUtil.ts";
 
 interface IPaymentMethod {
     id: number;
@@ -88,12 +89,12 @@ const OrderPayment: React.FC = () => {
                     {cartStore.cartProducts.map((product, index) => (
                         <div key={index} className="px-4 py-6 pb-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                             <dt className="text-sm font-medium leading-6 text-gray-900">{product.name}</dt>
-                            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">${product.price}</dd>
+                            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">${formattedPrice(product.price ?? 0)}</dd>
                         </div>
                     ))}
                     <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt className="text-xl font-bold leading-6 text-gray-900">Total</dt>
-                        <dd className="mt-1 text-xl leading-6 font-bold text-gray-700 sm:col-span-2 sm:mt-0">${cartStore.total}</dd>
+                        <dd className="mt-1 text-xl leading-6 font-bold text-gray-700 sm:col-span-2 sm:mt-0">${formattedPrice(cartStore.total)}</dd>
                     </div>
                 </dl>
             </div>

@@ -14,7 +14,7 @@
     "@heroicons/react": "^2.1.5",
     "@react-keycloak/web": "^3.4.0",
     "@stripe/react-stripe-js": "^2.8.0",
-    "@stripe/stripe-js": "^4.4.0",
+    "@stripe/stripe-js": "^4.5.0",
     "keycloak-js": "^25.0.5",
     "mobx": "^6.13.2",
     "mobx-react-lite": "^4.0.7",

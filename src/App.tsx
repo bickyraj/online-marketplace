@@ -12,6 +12,8 @@ import MyOrders from "./components/orders/MyOrders.tsx";
 import Checkout from "./components/mycart/checkout/Checkout.tsx";
 import PaymentSuccessful from "./components/payment/PaymentSuccessful.tsx";
 import userStore from "./store/UserStore.ts";
+import PaymentMethods from "./components/payment/PaymentMethods.tsx";
+import AddPaymentMethod from "./components/payment/AddPaymentMethod.tsx";
 
 const App: React.FC = () => {
     const onEvent = (event: string) => {
@@ -40,6 +42,8 @@ const App: React.FC = () => {
                           <Route path="/admin/dashboard" element={<Dashboard/>} />
                           <Route path="/admin/products" element={<ProductList/>} />
                           <Route path="/admin/my-order-history" element={<MyOrders/>} />
+                          <Route path="/admin/my-payment-methods" element={<PaymentMethods/>} />
+                          <Route path="/admin/add-payment-method" element={<AddPaymentMethod/>} />
                           <Route path="/admin/register" element={<RegistrationForm/>}/>
                           <Route path="/admin/checkout" element={<Checkout/>}/>
                           <Route path="/admin/payment-successful" element={<PaymentSuccessful/>}/>

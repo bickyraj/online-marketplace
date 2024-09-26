@@ -30,6 +30,7 @@ const navigation = [
     { name: 'All Products', href: '/admin/products', current: false },
     { name: 'Registration', href: '/admin/register', current: false },
     { name: 'My Order History', href: '/admin/my-order-history', current: false },
+    { name: 'My Payment Methods', href: '/admin/my-payment-methods', current: false },
     { name: 'Reports', href: '#', current: false },
 ]
 const userNavigation = [
@@ -134,7 +135,9 @@ const MainLayout: React.FC = () => {
                                                 onClick={() => {
                                                     cartStore.clearCart();
                                                     userStore.clearUser();
-                                                    keycloak.logout();
+                                                    keycloak.logout({
+                                                        redirectUri: window.location.origin, // Should match one of the Post Logout Redirect URIs
+                                                    });
                                                 }}
                                             >Sign out</button>
                                         </MenuItems>
