@@ -32,6 +32,7 @@ const navigation = [
     { name: 'My Order History', href: '/admin/my-order-history', current: false },
     { name: 'My Payment Methods', href: '/admin/my-payment-methods', current: false },
     { name: 'Reports', href: '#', current: false },
+    { name: 'Services', href: '/admin/services', current: false },
 ]
 const userNavigation = [
     { name: 'Your Profile', href: '#' },

@@ -14,6 +14,8 @@ import PaymentSuccessful from "./components/payment/PaymentSuccessful.tsx";
 import userStore from "./store/UserStore.ts";
 import PaymentMethods from "./components/payment/PaymentMethods.tsx";
 import AddPaymentMethod from "./components/payment/AddPaymentMethod.tsx";
+import EurekaServices from "./components/eureka/EurekaServices.tsx";
+import AddProduct from "./components/products/AddProduct.tsx";
 
 const App: React.FC = () => {
     const onEvent = (event: string) => {
@@ -46,6 +48,8 @@ const App: React.FC = () => {
                           <Route path="/admin/add-payment-method" element={<AddPaymentMethod/>} />
                           <Route path="/admin/register" element={<RegistrationForm/>}/>
                           <Route path="/admin/checkout" element={<Checkout/>}/>
+                          <Route path="/admin/services" element={<EurekaServices/>}/>
+                          <Route path="/admin/product/new" element={<AddProduct/>}/>
                           <Route path="/admin/payment-successful" element={<PaymentSuccessful/>}/>
                     </Route>
                   </Route>
