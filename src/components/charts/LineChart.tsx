@@ -37,7 +37,7 @@ const LineChart: React.FC<LineChartProps> = ({ labels, data, title }) => {
         labels: labels,
         datasets: [
             {
-                label: 'Sample Data',
+                label: 'Purchase Amount',
                 data: data,
                 borderColor: 'rgba(75, 192, 192, 1)',
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
