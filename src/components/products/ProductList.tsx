@@ -42,12 +42,12 @@ const ProductList:React.FC = () => {
                     {products.map((product) => (
                         <div key={product.id} className="group relative">
                             <div
-                                className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                                {/*<img*/}
-                                {/*    alt={product.imageAlt}*/}
-                                {/*    src={product.imageSrc}*/}
-                                {/*    className="h-full w-full object-cover object-center lg:h-full lg:w-full"*/}
-                                {/*/>*/}
+                                className="aspect-auto h-48 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-300">
+                                <img
+                                    alt="product"
+                                    src={product.mediumImageUrl}
+                                    className="h-auto w-full object-cover object-center"
+                                />
                             </div>
                             <div className="mt-4 flex justify-between">
                                 <div>

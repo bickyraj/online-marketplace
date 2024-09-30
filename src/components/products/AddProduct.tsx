@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 const AddProduct:React.FC = () => {
     const {keycloak} = useKeycloak();
     const navigate = useNavigate();
+    const [image, setImage] = useState<File | null>(null);
     const [formData, setFormData] = useState({
         name: '',
         price: '',
@@ -19,15 +20,26 @@ const AddProduct:React.FC = () => {
         setFormData({ ...formData, [name]: value });
     };
 
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedFile = e.target.files?.[0]; // Get the first selected file
+        if (selectedFile) {
+            setImage(selectedFile);
+        }
+    };
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const form = new FormData();
+        form.append('productImage', image ?? "");
+        form.append('name', formData.name);
+        form.append('price', formData.price);
+        form.append('description', formData.description);
         const requestOptions = {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${keycloak.token}`,
             },
-            body: JSON.stringify(formData)
+            body: form,
         };
         fetch('http://localhost:8080/api/products/create', requestOptions)
             .then((res) => {
@@ -94,7 +106,8 @@ const AddProduct:React.FC = () => {
                                     </div>
 
                                     <div className="sm:col-span-6">
-                                        <label htmlFor="description" className="block text-sm font-medium leading-6 text-gray-900">
+                                        <label htmlFor="description"
+                                               className="block text-sm font-medium leading-6 text-gray-900">
                                             Description
                                         </label>
                                         <div className="mt-2">
@@ -109,6 +122,25 @@ const AddProduct:React.FC = () => {
                                             />
                                         </div>
                                     </div>
+
+                                    <div className="sm:col-span-6">
+                                        <label htmlFor="description"
+                                               className="block text-sm font-medium leading-6 text-gray-900">
+                                            Product Image
+                                        </label>
+                                        <div className="mt-2">
+                                            <input
+                                                id="description"
+                                                name="description"
+                                                accept="image/*" onChange={handleImageChange}
+                                                type="file"
+                                                autoComplete="address-level1"
+                                                className="p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            />
+                                        </div>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>

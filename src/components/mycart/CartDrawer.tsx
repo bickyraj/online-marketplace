@@ -70,11 +70,11 @@ const CartDrawer: React.FC<IProps> = (props) =>  {
                                                     <li key={index} className="flex py-6">
                                                         <div
                                                             className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                                            {/*<img*/}
-                                                            {/*    alt={product.name}*/}
-                                                            {/*    src={product.name}*/}
-                                                            {/*    className="h-full w-full object-cover object-center"*/}
-                                                            {/*/>*/}
+                                                            <img
+                                                                alt={product.name}
+                                                                src={product.thumbImageUrl}
+                                                                className="h-full w-full object-cover object-center"
+                                                            />
                                                         </div>
 
                                                         <div className="ml-4 flex flex-1 flex-col">
