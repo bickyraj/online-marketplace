@@ -57,7 +57,7 @@ const ProductList:React.FC = () => {
                                         {/*    {product.name}*/}
                                         {/*</a>*/}
                                     </h3>
-                                    <p className="mt-1 text-sm text-gray-500">{product.description}</p>
+                                    <p className="mt-1 text-sm text-gray-500">{product.name}</p>
                                 </div>
                                 <p className="text-sm font-medium text-gray-900">${formattedPrice(product.price ?? 0)}</p>
                             </div>
