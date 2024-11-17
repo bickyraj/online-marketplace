@@ -65,7 +65,7 @@ const MainLayout: React.FC = () => {
                                 <div className="flex-shrink-0">
                                     <img
                                         alt="Your Company"
-                                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                                        src="/src/assets/logo.png"
                                         className="h-8 w-8"
                                     />
                                 </div>
